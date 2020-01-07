@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var User = /** @class */ (function () {
     function User(response) {
+        this.repos = [];
         this.login = response.login;
         this.company = response.company;
         this.bio = response.company;
