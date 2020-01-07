@@ -19,6 +19,7 @@
   "homepage": "https://github.com/bigEyesAndSmallEyes/wangfulong#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "graphql": "^14.5.8",
     "request": "^2.88.0"
   },
   "devDependencies": {
