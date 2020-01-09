@@ -1,44 +1,65 @@
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+const express = require("express");
+const graphqlHTTP = require("express-graphql");
+const { buildSchema } = require("graphql");
 
 const schema = buildSchema(`
     type Account {
         name: String
-        age: Int 
+        age: Int
         sex: String
         department: String
+        salary(city: String): Int
     }
-
     type Query {
-        hello: String
-        accountName: String
-        account: Account
+        getClassMate(classNo: Int!): [String]
+        account(username: String): Account
     }
+   
 `);
 
 const root = {
-    hello: () => {
-        return 'Hello Graphql';
-    },
-    accountName: () => {
-        return 'wangfulong';
-    },
-    account: () => {
-        return {
-            name: 'wfl',
-            age: 18,
-            sex: 'male',
-            department: 'dept01'
+  getClassMate({ classNo }) {
+    const obj = {
+      31: ["aaa", "bbb"],
+      32: ["accaa", "ddd"]
+    };
+    return obj[classNo];
+  },
+  account({username}) {
+      const name = username;
+      const sex = "man";
+      const age = 18;
+      const department = "zongban";
+      const salary = ({city}) => {
+        if(city == "beijing") {
+            return 10000;
         }
-    }
-}
+        return 3000;
+      }
+
+      return {
+          name,
+          sex,
+          age,
+          department,
+          salary
+      }
+  }
+};
 
 const app = express();
-app.use('/graphql', graphqlHTTP({
+app.use(
+  "/graphql",
+  graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true
-}));
+  })
+);
 
-app.listen(4000, () => { console.log('Now browse to localhost:4000/graphql')});
+// 公开文件夹,供用户访问静态资源
+app.use(express.static('public'));
+
+app.listen(4000, () => {
+  console.log("Now browse to localhost:4000/graphql");
+});
