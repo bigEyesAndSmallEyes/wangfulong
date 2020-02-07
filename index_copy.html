@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+    <div id="app">
+      <a href="kim://">kim://</a> <br>
+      <a href="kim://home">kim://home</a><br>
+      <a href="kim://message">kim://message</a><br>
+      <a href="kim://calendar">kim://calendar</a><br>
+      <a href="kim://apps">kim://apps</a><br>
+      <a href="kim://contact">kim://contact</a><br>
+      <a href="kim://mine">kim://mine</a><br>
+      <a href="kim://user?id=NYxajPjrdvZ7rDJSK">kim://user?id=NYxajPjrdvZ7rDJSK</a><br>
+      <a href="kim://thread?id=1054">kim://thread?id=1054</a><br>
+      <a href="kim://docs">kim://docs</a><br>
+      <a href="kim://settings">kim://settings</a><br>
+    </div>
+    URL Scheme: <input type="text" id="urlScheme" >
+
+    <button onClick="onJumpClick()">点击跳转</button>
+
+    <script>
+      function onJumpClick() {
+        var url = document.getElementById("urlScheme").value;
+        window.location = url; 
+      }
+       
+    </script>
+  </body>
+</html>
