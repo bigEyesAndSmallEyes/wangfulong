@@ -3,6 +3,7 @@ import { User } from './User';
 import { Repo } from './Repo';
 import _ from 'lodash';
 
+
 let svc: GithubApiService = new GithubApiService();
 console.log(process.argv);
 if(process.argv.length < 3) {

@@ -1,0 +1,22 @@
+{
+  "nested": {
+    "KimMessageType": {
+      "values": {
+        "UNKNOWN": 0,
+        "ANNOUNCEMENT_PUBLISHED": 1002
+      }
+    },
+    "AnnouncementPublished": {
+      "fields": {
+        "sendToNew": {
+          "type": "bool",
+          "id": 1
+        },
+        "content": {
+          "type": "string",
+          "id": 2
+        }
+      }
+    }
+  }
+}

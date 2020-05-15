@@ -1,268 +1,1746 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<!DOCTYPE html>
+<html>
+<head>
+<title>ZSSRichTextEditor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>kim下载</title>
-  </head>
-  <style>
-  
-  body {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: 0;
-  font-family: quote, "Roboto", "Helvetica Neue", Helvetica, Arial,
-    "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN",
-    "Source Han Sans SC", "Microsoft YaHei", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-shadow: transparent 0px 0px 0px, rgba(0, 0, 0, 0.68) 0px 0px 0px !important;
-}
-
-.kim-download-wrap {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 100%;
-  overflow: auto;
-}
-
-.kim-download-wrap .header {
-  height: 65px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0px 12px 8px 0px rgba(239, 239, 239, 0.1),
-    0px 2px 4px 0px rgba(45, 45, 45, 0.3);
-}
-
-.kim-download-wrap .content {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.kim-download-wrap .content .inner-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 192px;
-}
-
-.kim-download-wrap .content .inner-wrap h2 {
-  line-height: 48px;
-  margin: 80px 0 100px;
-  font-size: 48px;
-  font-weight: 400;
-}
-
-.kim-download-wrap .content .download-guide-list {
-  display: flex;
-  position: absolute;
-  bottom: -124px;
-}
-
-.download-guide-list .guide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 16px;
-  width: 220px;
-  height: 256px;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 1px 17px 1px rgba(223, 229, 235, 0.71);
-  border-radius: 4px;
-  margin: 20px;
-}
-.download-guide-list .icon-wrap {
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 46px;
-}
-
-.download-guide-list .qrcode-img {
-  display: none;
-  padding-top: 20px;
-}
-
-.download-guide-list .guide .title {
-  padding-top: 23px;
-  color: #757575;
-  line-height: 18px;
-}
-
-.download-guide-list .guide .detail {
-  color: #8b8b8b;
-  padding-top: 14px;
-}
-
-.download-guide-list .guide a {
-  color: #4f7cff;
-  cursor: pointer;
-  padding-top: 28px;
-}
-
-.kim-download-wrap .footer {
-  flex: 1;
-  background: #f6f6f6;
-  min-height: 375px;
-}
-  </style>
-  <body>
-    <div class="kim-download-wrap">
-      <div class="header">
-        <img
-          srcset="/kimDownload/kim-logo.png, /kimDownload/kim-logo@2x.png 2x"
-        />
-      </div>
-      <div class="content">
-        <div class="inner-wrap">
-          <h2>下载立即使用KIM沟通协作</h2>
-          <img srcset="/kimDownload/ad.png, /kimDownload/ad@2x.png 2x" />
-        </div>
-        <div class="download-guide-list">
-          <div class="guide windows">
-            <div class="icon-wrap">
-              <img
-                class="guide-icon"
-                srcset="/kimDownload/win.png, /kimDownload/win@2x.png 2x"
-              />
-            </div>
-            <div class="title">PC</div>
-            <div class="detail" >win7/8/10 系统下载</div>
-            <a onclick="downloadWin()">下载</a>
-          </div>
-          <div class="guide mac">
-            <div class="icon-wrap">
-              <img
-                class="guide-icon"
-                srcset="/kimDownload/mac.png, /kimDownload/mac@2x.png 2x"
-              />
-            </div>
-            <div class="title">Mac</div>
-            <div class="detail">OS X 系统下载</div>
-            <a onclick="downloadMac()">下载</a>
-          </div>
-          <div class="guide ios">
-            <div id="iosQrcode" class="qrcode-img js-ios-qr"></div>
-            <div class="icon-wrap js-ios-hidden">
-              <img
-                class="guide-icon"
-                srcset="/kimDownload/ios.png, /kimDownload/ios@2x.png 2x"
-              />
-            </div>
-            <div class="title">iPhone</div>
-            <div class="detail js-ios-hidden">IOS 系统下载</div>
-            <a class="js-ios-hidden" onclick="handleIOS()">扫一扫下载</a>
-          </div>
-          <div class="guide android">
-            <div id="androidQrcode" class="qrcode-img js-android-qr"></div>
-            <div class="icon-wrap js-android-hidden">
-              <img
-                class="guide-icon"
-                srcset="
-                  /kimDownload/android.png,
-                  /kimDownload/android@2x.png 2x
-                "
-              />
-            </div>
-            <div class="title">Android</div>
-            <div class="detail js-android-hidden">Android 系统下载</div>
-            <a class="js-android-hidden" onclick="handleAndroid()"
-              >扫一扫下载</a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="footer"></div>
-    </div>
-    <img src="/qrcode.jpeg"/>
-  </body>
-  <script type="text/javascript" src="/qrcode.min.js"></script>
-  <script type="text/javascript">
-      function downloadURI(uri) {
-        var link = document.createElement("a");
-        link.download = uri.substring(uri.lastIndexOf('/')+1);
-        link.href = uri;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        delete link;
+<!-- Custom CSS Styling -->
+<style type="text/css">
+    
+    /* Custom CSS Styling */
+    .ql-container {
+      box-sizing: border-box;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      height: 100%;
+      margin: 0px;
+      position: relative;
+    }
+    .ql-container.ql-disabled .ql-tooltip {
+      visibility: hidden;
+    }
+    .ql-container.ql-disabled #zss_editor_content ul[data-checked] > li::before {
+      pointer-events: none;
+    }
+    .ql-clipboard {
+      left: -100000px;
+      height: 1px;
+      overflow-y: hidden;
+      position: absolute;
+      top: 50%;
+    }
+    .ql-clipboard p {
+      margin: 0;
+      padding: 0;
+    }
+    #zss_editor_content {
+      box-sizing: border-box;
+      line-height: 1.42;
+      height: 100%;
+      outline: none;
+      overflow-y: auto;
+      padding: 12px 15px;
+      tab-size: 4;
+      -moz-tab-size: 4;
+      text-align: left;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    #zss_editor_content > * {
+      cursor: text;
+    }
+    #zss_editor_content p,
+    #zss_editor_content ol,
+    #zss_editor_content ul,
+    #zss_editor_content pre,
+    #zss_editor_content blockquote,
+    #zss_editor_content h1,
+    #zss_editor_content h2,
+    #zss_editor_content h3,
+    #zss_editor_content h4,
+    #zss_editor_content h5,
+    #zss_editor_content h6 {
+      margin: 0;
+      padding: 0;
+      counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    }
+    #zss_editor_content ol,
+    #zss_editor_content ul {
+      padding-left: 1.5em;
+    }
+    #zss_editor_content ol > li,
+    #zss_editor_content ul > li {
+      list-style-type: none;
+    }
+    #zss_editor_content ul > li::before {
+      content: '\2022';
+    }
+    #zss_editor_content ul[data-checked=true],
+    #zss_editor_content ul[data-checked=false] {
+      pointer-events: none;
+    }
+    #zss_editor_content ul[data-checked=true] > li *,
+    #zss_editor_content ul[data-checked=false] > li * {
+      pointer-events: all;
+    }
+    #zss_editor_content ul[data-checked=true] > li::before,
+    #zss_editor_content ul[data-checked=false] > li::before {
+      color:#777;
+      cursor: pointer;
+      pointer-events: all;
+    }
+    #zss_editor_content ul[data-checked=true] > li::before {
+      content: '\2611';
+    }
+    #zss_editor_content ul[data-checked=false] > li::before {
+      content: '\2610';
+    }
+    #zss_editor_content li::before {
+      display: inline-block;
+      white-space: nowrap;
+      width: 1.2em;
+    }
+    #zss_editor_content li:not(.ql-direction-rtl)::before {
+      margin-left: -1.5em;
+      margin-right: 0.3em;
+      text-align: right;
+    }
+    #zss_editor_content li.ql-direction-rtl::before {
+      margin-left: 0.3em;
+      margin-right: -1.5em;
+    }
+    #zss_editor_content ol li:not(.ql-direction-rtl),
+    #zss_editor_content ul li:not(.ql-direction-rtl) {
+      padding-left: 1.5em;
+    }
+    #zss_editor_content ol li.ql-direction-rtl,
+    #zss_editor_content ul li.ql-direction-rtl {
+      padding-right: 1.5em;
+    }
+    #zss_editor_content ol li {
+      counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+      counter-increment: list-0;
+    }
+    #zss_editor_content ol li:before {
+      content: counter(list-0, decimal) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-1 {
+      counter-increment: list-1;
+    }
+    #zss_editor_content ol li.ql-indent-1:before {
+      content: counter(list-1, lower-alpha) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-1 {
+      counter-reset: list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-2 {
+      counter-increment: list-2;
+    }
+    #zss_editor_content ol li.ql-indent-2:before {
+      content: counter(list-2, lower-roman) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-2 {
+      counter-reset: list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-3 {
+      counter-increment: list-3;
+    }
+    #zss_editor_content ol li.ql-indent-3:before {
+      content: counter(list-3, decimal) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-3 {
+      counter-reset: list-4 list-5 list-6 list-7 list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-4 {
+      counter-increment: list-4;
+    }
+    #zss_editor_content ol li.ql-indent-4:before {
+      content: counter(list-4, lower-alpha) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-4 {
+      counter-reset: list-5 list-6 list-7 list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-5 {
+      counter-increment: list-5;
+    }
+    #zss_editor_content ol li.ql-indent-5:before {
+      content: counter(list-5, lower-roman) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-5 {
+      counter-reset: list-6 list-7 list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-6 {
+      counter-increment: list-6;
+    }
+    #zss_editor_content ol li.ql-indent-6:before {
+      content: counter(list-6, decimal) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-6 {
+      counter-reset: list-7 list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-7 {
+      counter-increment: list-7;
+    }
+    #zss_editor_content ol li.ql-indent-7:before {
+      content: counter(list-7, lower-alpha) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-7 {
+      counter-reset: list-8 list-9;
+    }
+    #zss_editor_content ol li.ql-indent-8 {
+      counter-increment: list-8;
+    }
+    #zss_editor_content ol li.ql-indent-8:before {
+      content: counter(list-8, lower-roman) '. ';
+    }
+    #zss_editor_content ol li.ql-indent-8 {
+      counter-reset: list-9;
+    }
+    #zss_editor_content ol li.ql-indent-9 {
+      counter-increment: list-9;
+    }
+    #zss_editor_content ol li.ql-indent-9:before {
+      content: counter(list-9, decimal) '. ';
+    }
+    #zss_editor_content .ql-indent-1:not(.ql-direction-rtl) {
+      padding-left: 3em;
+    }
+    #zss_editor_content li.ql-indent-1:not(.ql-direction-rtl) {
+      padding-left: 4.5em;
+    }
+    #zss_editor_content .ql-indent-1.ql-direction-rtl.ql-align-right {
+      padding-right: 3em;
+    }
+    #zss_editor_content li.ql-indent-1.ql-direction-rtl.ql-align-right {
+      padding-right: 4.5em;
+    }
+    #zss_editor_content .ql-indent-2:not(.ql-direction-rtl) {
+      padding-left: 6em;
+    }
+    #zss_editor_content li.ql-indent-2:not(.ql-direction-rtl) {
+      padding-left: 7.5em;
+    }
+    #zss_editor_content .ql-indent-2.ql-direction-rtl.ql-align-right {
+      padding-right: 6em;
+    }
+    #zss_editor_content li.ql-indent-2.ql-direction-rtl.ql-align-right {
+      padding-right: 7.5em;
+    }
+    #zss_editor_content .ql-indent-3:not(.ql-direction-rtl) {
+      padding-left: 9em;
+    }
+    #zss_editor_content li.ql-indent-3:not(.ql-direction-rtl) {
+      padding-left: 10.5em;
+    }
+    #zss_editor_content .ql-indent-3.ql-direction-rtl.ql-align-right {
+      padding-right: 9em;
+    }
+    #zss_editor_content li.ql-indent-3.ql-direction-rtl.ql-align-right {
+      padding-right: 10.5em;
+    }
+    #zss_editor_content .ql-indent-4:not(.ql-direction-rtl) {
+      padding-left: 12em;
+    }
+    #zss_editor_content li.ql-indent-4:not(.ql-direction-rtl) {
+      padding-left: 13.5em;
+    }
+    #zss_editor_content .ql-indent-4.ql-direction-rtl.ql-align-right {
+      padding-right: 12em;
+    }
+    #zss_editor_content li.ql-indent-4.ql-direction-rtl.ql-align-right {
+      padding-right: 13.5em;
+    }
+    #zss_editor_content .ql-indent-5:not(.ql-direction-rtl) {
+      padding-left: 15em;
+    }
+    #zss_editor_content li.ql-indent-5:not(.ql-direction-rtl) {
+      padding-left: 16.5em;
+    }
+    #zss_editor_content .ql-indent-5.ql-direction-rtl.ql-align-right {
+      padding-right: 15em;
+    }
+    #zss_editor_content li.ql-indent-5.ql-direction-rtl.ql-align-right {
+      padding-right: 16.5em;
+    }
+    #zss_editor_content .ql-indent-6:not(.ql-direction-rtl) {
+      padding-left: 18em;
+    }
+    #zss_editor_content li.ql-indent-6:not(.ql-direction-rtl) {
+      padding-left: 19.5em;
+    }
+    #zss_editor_content .ql-indent-6.ql-direction-rtl.ql-align-right {
+      padding-right: 18em;
+    }
+    #zss_editor_content li.ql-indent-6.ql-direction-rtl.ql-align-right {
+      padding-right: 19.5em;
+    }
+    #zss_editor_content .ql-indent-7:not(.ql-direction-rtl) {
+      padding-left: 21em;
+    }
+    #zss_editor_content li.ql-indent-7:not(.ql-direction-rtl) {
+      padding-left: 22.5em;
+    }
+    #zss_editor_content .ql-indent-7.ql-direction-rtl.ql-align-right {
+      padding-right: 21em;
+    }
+    #zss_editor_content li.ql-indent-7.ql-direction-rtl.ql-align-right {
+      padding-right: 22.5em;
+    }
+    #zss_editor_content .ql-indent-8:not(.ql-direction-rtl) {
+      padding-left: 24em;
+    }
+    #zss_editor_content li.ql-indent-8:not(.ql-direction-rtl) {
+      padding-left: 25.5em;
+    }
+    #zss_editor_content .ql-indent-8.ql-direction-rtl.ql-align-right {
+      padding-right: 24em;
+    }
+    #zss_editor_content li.ql-indent-8.ql-direction-rtl.ql-align-right {
+      padding-right: 25.5em;
+    }
+    #zss_editor_content .ql-indent-9:not(.ql-direction-rtl) {
+      padding-left: 27em;
+    }
+    #zss_editor_content li.ql-indent-9:not(.ql-direction-rtl) {
+      padding-left: 28.5em;
+    }
+    #zss_editor_content .ql-indent-9.ql-direction-rtl.ql-align-right {
+      padding-right: 27em;
+    }
+    #zss_editor_content li.ql-indent-9.ql-direction-rtl.ql-align-right {
+      padding-right: 28.5em;
+    }
+    #zss_editor_content .ql-video {
+      display: block;
+      max-width: 100%;
+    }
+    #zss_editor_content .ql-video.ql-align-center {
+      margin: 0 auto;
+    }
+    #zss_editor_content .ql-video.ql-align-right {
+      margin: 0 0 0 auto;
+    }
+    #zss_editor_content .ql-bg-black {
+      background-color:#000;
+    }
+    #zss_editor_content .ql-bg-red {
+      background-color:#e60000;
+    }
+    #zss_editor_content .ql-bg-orange {
+      background-color:#f90;
+    }
+    #zss_editor_content .ql-bg-yellow {
+      background-color:#ff0;
+    }
+    #zss_editor_content .ql-bg-green {
+      background-color:#008a00;
+    }
+    #zss_editor_content .ql-bg-blue {
+      background-color:#06c;
+    }
+    #zss_editor_content .ql-bg-purple {
+      background-color:#93f;
+    }
+    #zss_editor_content .ql-color-white {
+      color:#fff;
+    }
+    #zss_editor_content .ql-color-red {
+      color:#e60000;
+    }
+    #zss_editor_content .ql-color-orange {
+      color:#f90;
+    }
+    #zss_editor_content .ql-color-yellow {
+      color:#ff0;
+    }
+    #zss_editor_content .ql-color-green {
+      color:#008a00;
+    }
+    #zss_editor_content .ql-color-blue {
+      color:#06c;
+    }
+    #zss_editor_content .ql-color-purple {
+      color:#93f;
+    }
+    #zss_editor_content .ql-font-serif {
+      font-family: Georgia, Times New Roman, serif;
+    }
+    #zss_editor_content .ql-font-monospace {
+      font-family: Monaco, Courier New, monospace;
+    }
+    #zss_editor_content .ql-size-small {
+      font-size: 0.75em;
+    }
+    #zss_editor_content .ql-size-large {
+      font-size: 1.5em;
+    }
+    #zss_editor_content .ql-size-huge {
+      font-size: 2.5em;
+    }
+    #zss_editor_content .ql-direction-rtl {
+      direction: rtl;
+      text-align: inherit;
+    }
+    #zss_editor_content .ql-align-center {
+      text-align: center;
+    }
+    #zss_editor_content .ql-align-justify {
+      text-align: justify;
+    }
+    #zss_editor_content .ql-align-right {
+      text-align: right;
+    }
+    #zss_editor_content.ql-blank::before {
+      color: rgba(0,0,0,0.6);
+      content: attr(data-placeholder);
+      font-style: italic;
+      left: 15px;
+      pointer-events: none;
+      position: absolute;
+      right: 15px;
+    }
+    .ql-snow.ql-toolbar:after,
+    .ql-snow .ql-toolbar:after {
+      clear: both;
+      content: '';
+      display: table;
+    }
+    .ql-snow.ql-toolbar button,
+    .ql-snow .ql-toolbar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      float: left;
+      height: 24px;
+      padding: 3px 5px;
+      width: 28px;
+    }
+    .ql-snow.ql-toolbar button svg,
+    .ql-snow .ql-toolbar button svg {
+      float: left;
+      height: 100%;
+    }
+    .ql-snow.ql-toolbar button:active:hover,
+    .ql-snow .ql-toolbar button:active:hover {
+      outline: none;
+    }
+    .ql-snow.ql-toolbar input.ql-image[type=file],
+    .ql-snow .ql-toolbar input.ql-image[type=file] {
+      display: none;
+    }
+    .ql-snow.ql-toolbar button:hover,
+    .ql-snow .ql-toolbar button:hover,
+    .ql-snow.ql-toolbar button:focus,
+    .ql-snow .ql-toolbar button:focus,
+    .ql-snow.ql-toolbar button.ql-active,
+    .ql-snow .ql-toolbar button.ql-active,
+    .ql-snow.ql-toolbar .ql-picker-label:hover,
+    .ql-snow .ql-toolbar .ql-picker-label:hover,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow.ql-toolbar .ql-picker-item:hover,
+    .ql-snow .ql-toolbar .ql-picker-item:hover,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+      color:#06c;
+    }
+    .ql-snow.ql-toolbar button:hover .ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-fill,
+    .ql-snow.ql-toolbar button:focus .ql-fill,
+    .ql-snow .ql-toolbar button:focus .ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+    .ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
+      fill:#06c;
+    }
+    .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .ql-snow .ql-toolbar button:hover .ql-stroke,
+    .ql-snow.ql-toolbar button:focus .ql-stroke,
+    .ql-snow .ql-toolbar button:focus .ql-stroke,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+    .ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar button:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+    .ql-snow .ql-toolbar button:focus .ql-stroke-miter,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
+      stroke:#06c;
+    }
+    @media (pointer: coarse) {
+      .ql-snow.ql-toolbar button:hover:not(.ql-active),
+      .ql-snow .ql-toolbar button:hover:not(.ql-active) {
+        color:#444;
       }
-      function getDownloadUrl(type, callback) {
-        'use strict';
-        //TODO: 增加线上downlaod地址
-        var url = `http://bjfk-staging-ls46.yz02:8090/api/app/download?type=${type}`;
+      .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-fill,
+      .ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-fill,
+      .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill,
+      .ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill {
+        fill:#444;
+      }
+      .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke,
+      .ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-stroke,
+      .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke-miter,
+      .ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-stroke-miter {
+        stroke:#444;
+      }
+    }
+    .ql-snow {
+      box-sizing: border-box;
+    }
+    .ql-snow * {
+      box-sizing: border-box;
+    }
+    .ql-snow .ql-hidden {
+      display: none;
+    }
+    .ql-snow .ql-out-bottom,
+    .ql-snow .ql-out-top {
+      visibility: hidden;
+    }
+    .ql-snow .ql-tooltip {
+      position: absolute;
+      transform: translateY(10px);
+    }
+    .ql-snow .ql-tooltip a {
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .ql-snow .ql-tooltip.ql-flip {
+      transform: translateY(-10px);
+    }
+    .ql-snow .ql-formats {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .ql-snow .ql-formats:after {
+      clear: both;
+      content: '';
+      display: table;
+    }
+    .ql-snow .ql-stroke {
+      fill: none;
+      stroke:#444;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
+    .ql-snow .ql-stroke-miter {
+      fill: none;
+      stroke:#444;
+      stroke-miterlimit: 10;
+      stroke-width: 2;
+    }
+    .ql-snow .ql-fill,
+    .ql-snow .ql-stroke.ql-fill {
+      fill:#444;
+    }
+    .ql-snow .ql-empty {
+      fill: none;
+    }
+    .ql-snow .ql-even {
+      fill-rule: evenodd;
+    }
+    .ql-snow .ql-thin,
+    .ql-snow .ql-stroke.ql-thin {
+      stroke-width: 1;
+    }
+    .ql-snow .ql-transparent {
+      opacity: 0.4;
+    }
+    .ql-snow .ql-direction svg:last-child {
+      display: none;
+    }
+    .ql-snow .ql-direction.ql-active svg:last-child {
+      display: inline;
+    }
+    .ql-snow .ql-direction.ql-active svg:first-child {
+      display: none;
+    }
+    .ql-snow #zss_editor_content h1 {
+      font-size: 2em;
+    }
+    .ql-snow #zss_editor_content h2 {
+      font-size: 1.5em;
+    }
+    .ql-snow #zss_editor_content h3 {
+      font-size: 1.17em;
+    }
+    .ql-snow #zss_editor_content h4 {
+      font-size: 1em;
+    }
+    .ql-snow #zss_editor_content h5 {
+      font-size: 0.83em;
+    }
+    .ql-snow #zss_editor_content h6 {
+      font-size: 0.67em;
+    }
+    .ql-snow #zss_editor_content a {
+      text-decoration: underline;
+    }
+    .ql-snow #zss_editor_content blockquote {
+      border-left: 4px solid#ccc;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      padding-left: 16px;
+    }
+    .ql-snow #zss_editor_content code,
+    .ql-snow #zss_editor_content pre {
+      background-color:#f0f0f0;
+      border-radius: 3px;
+    }
+    .ql-snow #zss_editor_content pre {
+      white-space: pre-wrap;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      padding: 5px 10px;
+    }
+    .ql-snow #zss_editor_content code {
+      font-size: 85%;
+      padding: 2px 4px;
+    }
+    .ql-snow #zss_editor_content pre.ql-syntax {
+      background-color:#23241f;
+      color:#f8f8f2;
+      overflow: visible;
+    }
+    .ql-snow #zss_editor_content img {
+      max-width: 100%;
+    }
+    .ql-snow .ql-picker {
+      color:#444;
+      display: inline-block;
+      float: left;
+      font-size: 14px;
+      font-weight: 500;
+      height: 24px;
+      position: relative;
+      vertical-align: middle;
+    }
+    .ql-snow .ql-picker-label {
+      cursor: pointer;
+      display: inline-block;
+      height: 100%;
+      padding-left: 8px;
+      padding-right: 2px;
+      position: relative;
+      width: 100%;
+    }
+    .ql-snow .ql-picker-label::before {
+      display: inline-block;
+      line-height: 22px;
+    }
+    .ql-snow .ql-picker-options {
+      background-color:#fff;
+      display: none;
+      min-width: 100%;
+      padding: 4px 8px;
+      position: absolute;
+      white-space: nowrap;
+    }
+    .ql-snow .ql-picker-options .ql-picker-item {
+      cursor: pointer;
+      display: block;
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+    .ql-snow .ql-picker.ql-expanded .ql-picker-label {
+      color:#ccc;
+      z-index: 2;
+    }
+    .ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-fill {
+      fill:#ccc;
+    }
+    .ql-snow .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+      stroke:#ccc;
+    }
+    .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+      display: block;
+      margin-top: -1px;
+      top: 100%;
+      z-index: 1;
+    }
+    .ql-snow .ql-color-picker,
+    .ql-snow .ql-icon-picker {
+      width: 28px;
+    }
+    .ql-snow .ql-color-picker .ql-picker-label,
+    .ql-snow .ql-icon-picker .ql-picker-label {
+      padding: 2px 4px;
+    }
+    .ql-snow .ql-color-picker .ql-picker-label svg,
+    .ql-snow .ql-icon-picker .ql-picker-label svg {
+      right: 4px;
+    }
+    .ql-snow .ql-icon-picker .ql-picker-options {
+      padding: 4px 0px;
+    }
+    .ql-snow .ql-icon-picker .ql-picker-item {
+      height: 24px;
+      width: 24px;
+      padding: 2px 4px;
+    }
+    .ql-snow .ql-color-picker .ql-picker-options {
+      padding: 3px 5px;
+      width: 152px;
+    }
+    .ql-snow .ql-color-picker .ql-picker-item {
+      border: 1px solid transparent;
+      float: left;
+      height: 16px;
+      margin: 2px;
+      padding: 0px;
+      width: 16px;
+    }
+    .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+      position: absolute;
+      margin-top: -9px;
+      right: 0;
+      top: 50%;
+      width: 18px;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-label]:not([data-label=''])::before,
+    .ql-snow .ql-picker.ql-font .ql-picker-label[data-label]:not([data-label=''])::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-label]:not([data-label=''])::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-label]:not([data-label=''])::before,
+    .ql-snow .ql-picker.ql-font .ql-picker-item[data-label]:not([data-label=''])::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-label]:not([data-label=''])::before {
+      content: attr(data-label);
+    }
+    .ql-snow .ql-picker.ql-header {
+      width: 98px;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item::before {
+      content: 'Normal';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="1"]::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+      content: 'Heading 1';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="2"]::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+      content: 'Heading 2';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="3"]::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+      content: 'Heading 3';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="4"]::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
+      content: 'Heading 4';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="5"]::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
+      content: 'Heading 5';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-label[data-value="6"]::before,
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
+      content: 'Heading 6';
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="1"]::before {
+      font-size: 2em;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="2"]::before {
+      font-size: 1.5em;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="3"]::before {
+      font-size: 1.17em;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="4"]::before {
+      font-size: 1em;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="5"]::before {
+      font-size: 0.83em;
+    }
+    .ql-snow .ql-picker.ql-header .ql-picker-item[data-value="6"]::before {
+      font-size: 0.67em;
+    }
+    .ql-snow .ql-picker.ql-font {
+      width: 108px;
+    }
+    .ql-snow .ql-picker.ql-font .ql-picker-label::before,
+    .ql-snow .ql-picker.ql-font .ql-picker-item::before {
+      content: 'Sans Serif';
+    }
+    .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=serif]::before,
+    .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
+      content: 'Serif';
+    }
+    .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=monospace]::before,
+    .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
+      content: 'Monospace';
+    }
+    .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=serif]::before {
+      font-family: Georgia, Times New Roman, serif;
+    }
+    .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=monospace]::before {
+      font-family: Monaco, Courier New, monospace;
+    }
+    .ql-snow .ql-picker.ql-size {
+      width: 98px;
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-label::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item::before {
+      content: 'Normal';
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+      content: 'Small';
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+      content: 'Large';
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+      content: 'Huge';
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+      font-size: 10px;
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+      font-size: 18px;
+    }
+    .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+      font-size: 32px;
+    }
+    .ql-snow .ql-color-picker.ql-background .ql-picker-item {
+      background-color:#fff;
+    }
+    .ql-snow .ql-color-picker.ql-color .ql-picker-item {
+      background-color:#000;
+    }
+    .ql-toolbar.ql-snow {
+      border: 1px solid#ccc;
+      box-sizing: border-box;
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+      padding: 8px;
+    }
+    .ql-toolbar.ql-snow .ql-formats {
+      margin-right: 15px;
+    }
+    .ql-toolbar.ql-snow .ql-picker-label {
+      border: 1px solid transparent;
+    }
+    .ql-toolbar.ql-snow .ql-picker-options {
+      border: 1px solid transparent;
+      box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
+    }
+    .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+      border-color:#ccc;
+    }
+    .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+      border-color:#ccc;
+    }
+    .ql-toolbar.ql-snow .ql-color-picker .ql-picker-item.ql-selected,
+    .ql-toolbar.ql-snow .ql-color-picker .ql-picker-item:hover {
+      border-color:#000;
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+      border-top: 0px;
+    }
+    .ql-snow .ql-tooltip {
+      background-color:#fff;
+      border: 1px solid#ccc;
+      box-shadow: 0px 0px 5px#ddd;
+      color:#444;
+      padding: 5px 12px;
+      white-space: nowrap;
+    }
+    .ql-snow .ql-tooltip::before {
+      content: "Visit URL:";
+      line-height: 26px;
+      margin-right: 8px;
+    }
+    .ql-snow .ql-tooltip input[type=text] {
+      display: none;
+      border: 1px solid#ccc;
+      font-size: 13px;
+      height: 26px;
+      margin: 0px;
+      padding: 3px 5px;
+      width: 170px;
+    }
+    .ql-snow .ql-tooltip a.ql-preview {
+      display: inline-block;
+      max-width: 200px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+    }
+    .ql-snow .ql-tooltip a.ql-action::after {
+      border-right: 1px solid#ccc;
+      content: 'Edit';
+      margin-left: 16px;
+      padding-right: 8px;
+    }
+    .ql-snow .ql-tooltip a.ql-remove::before {
+      content: 'Remove';
+      margin-left: 8px;
+    }
+    .ql-snow .ql-tooltip a {
+      line-height: 26px;
+    }
+    .ql-snow .ql-tooltip.ql-editing a.ql-preview,
+    .ql-snow .ql-tooltip.ql-editing a.ql-remove {
+      display: none;
+    }
+    .ql-snow .ql-tooltip.ql-editing input[type=text] {
+      display: inline-block;
+    }
+    .ql-snow .ql-tooltip.ql-editing a.ql-action::after {
+      border-right: 0px;
+      content: 'Save';
+      padding-right: 0px;
+    }
+    .ql-snow .ql-tooltip[data-mode=link]::before {
+      content: "Enter link:";
+    }
+    .ql-snow .ql-tooltip[data-mode=formula]::before {
+      content: "Enter formula:";
+    }
+    .ql-snow .ql-tooltip[data-mode=video]::before {
+      content: "Enter video:";
+    }
+    .ql-snow a {
+      color:#06c;
+    }
+    .ql-container.ql-snow {
+      border: 1px solid#ccc;
+    }
+    /*customcss*/
+    
+</style>
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-          'use strict';
-          
-          if (this.status != 200) { 
-            alert(`Error ${this.status}-${this.statusText} : ${this.responseText}`);
-          } else {
-            var jsonResponse = JSON.parse(this.response)
-            var url = jsonResponse.data;
-            callback(url);
-          }
-        } 
+<!-- jQuery Source For ZSSRichTextEditor -->
+<script>
+  /*!
+ *
+ * ZSSRichTextEditor v0.5.2
+ * http://www.zedsaid.com
+ *
+ * Copyright 2014 Zed Said Studio LLC
+ *
+ */
 
-        xhttp.onerror = function(e) {
-          'use strict';
-          alert(`Request onerror ${this.status}: ${this.statusText}`);
+var zss_editor = {};
+
+// If we are using iOS or desktop
+zss_editor.isUsingiOS = true;
+
+// If the user is draging
+zss_editor.isDragging = false;
+
+// The current selection
+zss_editor.currentSelection;
+
+// The current editing image
+zss_editor.currentEditingImage;
+
+// The current editing link
+zss_editor.currentEditingLink;
+
+// The objects that are enabled
+zss_editor.enabledItems = {};
+
+// Height of content window, will be set by viewController
+zss_editor.contentHeight = 244;
+
+// Sets to true when extra footer gap shows and requires to hide
+zss_editor.updateScrollOffset = false;
+
+/**
+ * The initializer function that must be called onLoad
+ */
+zss_editor.init = function() {
+    
+    // $('#zss_editor_content').on('touchend', function(e) {
+    //                             zss_editor.enabledEditingItems(e);
+    //                             var clicked = $(e.target);
+    //                             if (!clicked.hasClass('zs_active')) {
+    //                             $('img').removeClass('zs_active');
+    //                             }
+    //                             });
+    
+    // $(document).on('selectionchange',function(e){
+    //                zss_editor.calculateEditorHeightWithCaretPosition();
+    //                zss_editor.setScrollPosition();
+    //                zss_editor.enabledEditingItems(e);
+    //                });
+    
+    $(window).on('scroll', function(e) {
+                 zss_editor.updateOffset();
+                 });
+    
+    // Make sure that when we tap anywhere in the document we focus on the editor
+    // $(window).on('touchmove', function(e) {
+    //              zss_editor.isDragging = true;
+    //              zss_editor.updateScrollOffset = true;
+    //              zss_editor.setScrollPosition();
+    //              zss_editor.enabledEditingItems(e);
+    //              });
+    $(window).on('touchstart', function(e) {
+                 zss_editor.isDragging = false;
+                 });
+    $(window).on('touchend', function(e) {
+                 if (!zss_editor.isDragging && (e.target.id == "zss_editor_footer"||e.target.nodeName.toLowerCase() == "html")) {
+                 zss_editor.focusEditor();
+                 }
+                 });
+    
+}//end
+
+zss_editor.updateOffset = function() {
+    
+    if (!zss_editor.updateScrollOffset)
+        return;
+    
+    var offsetY = window.document.body.scrollTop;
+    
+    var footer = $('#zss_editor_footer');
+    
+    var maxOffsetY = footer.offset().top - zss_editor.contentHeight;
+    
+    if (maxOffsetY < 0)
+        maxOffsetY = 0;
+    
+    if (offsetY > maxOffsetY)
+    {
+        window.scrollTo(0, maxOffsetY);
+    }
+    
+    zss_editor.setScrollPosition();
+}
+
+// This will show up in the XCode console as we are able to push this into an NSLog.
+zss_editor.debug = function(msg) {
+    window.location = 'debug://'+msg;
+}
+
+
+zss_editor.setScrollPosition = function() {
+    var position = window.pageYOffset;
+    window.location = 'scroll://'+position;
+}
+
+
+zss_editor.setPlaceholder = function(placeholder) {
+    
+    var editor = $('#zss_editor_content');
+    
+    //set placeHolder
+	editor.attr("placeholder",placeholder);
+	
+    //set focus			 
+	editor.focusout(function(){
+        var element = $(this);        
+        if (!element.text().trim().length) {
+            element.empty();
         }
-        xhttp.open("GET", url, true);
-        xhttp.send();	
-      }
-    function downloadWin() {
-      getDownloadUrl('win32', function (url) {
-        downloadURI(url);
-      })
-    }
+    });
+	
+	
+    
+}
 
-    function downloadMac() {
-      getDownloadUrl('darwin', function (url) {
-        downloadURI(url);
-      })
-    }
+zss_editor.setFooterHeight = function(footerHeight) {
+    var footer = $('#zss_editor_footer');
+    footer.height(footerHeight + 'px');
+}
 
-    function handleIOS() {
-      var els = document.getElementsByClassName("js-ios-hidden");
-      var i;
-      for (i = 0; i < els.length; i++) {
-        els[i].style.display = "none";
-      }
-      new QRCode(document.getElementById("iosQrcode"), {
-        text: "https://itunes.apple.com/cn/app/kem/id1451160242?mt=8",
-        width: 180,
-        height: 180
-      });
-      document.getElementById("iosQrcode").style.display = "block";
-    }
+zss_editor.getCaretYPosition = function() {
+    var sel = window.getSelection();
+    // Next line is comented to prevent deselecting selection. It looks like work but if there are any issues will appear then uconmment it as well as code above.
+    //sel.collapseToStart();
+    var range = sel.getRangeAt(0);
+    var span = document.createElement('span');// something happening here preventing selection of elements
+    range.collapse(false);
+    range.insertNode(span);
+    var topPosition = span.offsetTop;
+    span.parentNode.removeChild(span);
+    return topPosition;
+}
 
-    function handleAndroid() {
-      var els = document.getElementsByClassName("js-android-hidden");
-      var i;
-      for (i = 0; i < els.length; i++) {
-        els[i].style.display = "none";
-      }
+zss_editor.calculateEditorHeightWithCaretPosition = function() {
+    
+    var padding = 50;
+    var c = zss_editor.getCaretYPosition();
+    
+    var editor = $('#zss_editor_content');
+    
+    var offsetY = window.document.body.scrollTop;
+    var height = zss_editor.contentHeight;
+    
+    var newPos = window.pageYOffset;
+    
+    if (c < offsetY) {
+        newPos = c;
+    } else if (c > (offsetY + height - padding)) {
+        newPos = c - height + padding - 18;
+    }
+    
+    window.scrollTo(0, newPos);
+}
+
+zss_editor.backuprange = function(){
+    var selection = window.getSelection();
+    var range = selection.getRangeAt(0);
+    zss_editor.currentSelection = {"startContainer": range.startContainer, "startOffset":range.startOffset,"endContainer":range.endContainer, "endOffset":range.endOffset};
+}
+
+zss_editor.restorerange = function(){
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    var range = document.createRange();
+    range.setStart(zss_editor.currentSelection.startContainer, zss_editor.currentSelection.startOffset);
+    range.setEnd(zss_editor.currentSelection.endContainer, zss_editor.currentSelection.endOffset);
+    selection.addRange(range);
+}
+
+zss_editor.getSelectedNode = function() {
+    var node,selection;
+    if (window.getSelection) {
+        selection = getSelection();
+        node = selection.anchorNode;
+    }
+    if (!node && document.selection) {
+        selection = document.selection
+        var range = selection.getRangeAt ? selection.getRangeAt(0) : selection.createRange();
+        node = range.commonAncestorContainer ? range.commonAncestorContainer :
+        range.parentElement ? range.parentElement() : range.item(0);
+    }
+    if (node) {
+        return (node.nodeName == "#text" ? node.parentNode : node);
+    }
+};
+
+zss_editor.setBold = function() {
+    document.execCommand('bold', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setItalic = function() {
+    document.execCommand('italic', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setSubscript = function() {
+    document.execCommand('subscript', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setSuperscript = function() {
+    document.execCommand('superscript', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setStrikeThrough = function() {
+    document.execCommand('strikeThrough', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setUnderline = function() {
+    document.execCommand('underline', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setBlockquote = function() {
+    var range = document.getSelection().getRangeAt(0);
+    formatName = range.commonAncestorContainer.parentElement.nodeName === 'BLOCKQUOTE'
+    || range.commonAncestorContainer.nodeName === 'BLOCKQUOTE' ? '<P>' : '<BLOCKQUOTE>';
+    document.execCommand('formatBlock', false, formatName)
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.removeFormating = function() {
+    document.execCommand('removeFormat', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setHorizontalRule = function() {
+    document.execCommand('insertHorizontalRule', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setHeading = function(heading) {
+    var current_selection = $(zss_editor.getSelectedNode());
+    var t = current_selection.prop("tagName").toLowerCase();
+    var is_heading = (t == 'h1' || t == 'h2' || t == 'h3' || t == 'h4' || t == 'h5' || t == 'h6');
+    if (is_heading && heading == t) {
+        var c = current_selection.html();
+        current_selection.replaceWith(c);
+    } else {
+        document.execCommand('formatBlock', false, '<'+heading+'>');
+    }
+    
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setParagraph = function() {
+    var current_selection = $(zss_editor.getSelectedNode());
+    var t = current_selection.prop("tagName").toLowerCase();
+    var is_paragraph = (t == 'p');
+    if (is_paragraph) {
+        var c = current_selection.html();
+        current_selection.replaceWith(c);
+    } else {
+        document.execCommand('formatBlock', false, '<p>');
+    }
+    
+    zss_editor.enabledEditingItems();
+}
+
+// Need way to remove formatBlock
+console.log('WARNING: We need a way to remove formatBlock items');
+
+zss_editor.undo = function() {
+    document.execCommand('undo', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.redo = function() {
+    document.execCommand('redo', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setOrderedList = function() {
+    document.execCommand('insertOrderedList', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setUnorderedList = function() {
+    document.execCommand('insertUnorderedList', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setCheckboxList = function() {    
+    document.execCommand('insertHTML', false, '<ul data-checked=false><li><em>123456</em></li></ul>');
+    zss_editor.enabledEditingItems();
+    setTimeout(() => {
+        zss_editor.addCheckboxTarget();
+    }, 1000);
+}
+
+zss_editor.addCheckboxTarget = function() {    
+    const buttons = document.querySelectorAll("ul[data-checked]");
+    console.error('-------->', buttons);
+    for (const button of buttons) {
+        button.addEventListener('click', function(event) {
+            console.error('-------->', click);
+            let parentNode = event.target.parentNode;
+            if  (parentNode && parentNode.hasAttribute("data-checked")) {
+                const checked = parentNode.getAttribute("data-checked") == "true" ? "false" : "true";
+                parentNode.setAttribute("data-checked",checked)
+            }
+        })
+    }
+}
+
+zss_editor.setJustifyCenter = function() {
+    document.execCommand('justifyCenter', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setJustifyFull = function() {
+    document.execCommand('justifyFull', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setJustifyLeft = function() {
+    document.execCommand('justifyLeft', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setJustifyRight = function() {
+    document.execCommand('justifyRight', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setIndent = function() {
+    document.execCommand('indent', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setOutdent = function() {
+    document.execCommand('outdent', false, null);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setFontFamily = function(fontFamily) {
+
+	zss_editor.restorerange();
+	document.execCommand("styleWithCSS", null, true);
+	document.execCommand("fontName", false, fontFamily);
+	document.execCommand("styleWithCSS", null, false);
+	zss_editor.enabledEditingItems();
+		
+}
+
+zss_editor.setTextColor = function(color) {
+		
+    zss_editor.restorerange();
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('foreColor', false, color);
+    document.execCommand("styleWithCSS", null, false);
+    zss_editor.enabledEditingItems();
+    // document.execCommand("removeFormat", false, "foreColor"); // Removes just foreColor
+	
+}
+
+zss_editor.setBackgroundColor = function(color) {
+    zss_editor.restorerange();
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('hiliteColor', false, color);
+    document.execCommand("styleWithCSS", null, false);
+    zss_editor.enabledEditingItems();
+}
+
+// Needs addClass method
+
+zss_editor.insertLink = function(url, title) {
+    
+    zss_editor.restorerange();
+    var sel = document.getSelection();
+    console.log(sel);
+    if (sel.toString().length != 0) {
+        if (sel.rangeCount) {
+            
+            var el = document.createElement("a");
+            el.setAttribute("href", url);
+            el.setAttribute("title", title);
+            
+            var range = sel.getRangeAt(0).cloneRange();
+            range.surroundContents(el);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+    }
+    else
+    {
+        document.execCommand("insertHTML",false,"<a href='"+url+"'>"+title+"</a>");
+    }
+    
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.updateLink = function(url, title) {
+    
+    zss_editor.restorerange();
+    
+    if (zss_editor.currentEditingLink) {
+        var c = zss_editor.currentEditingLink;
+        c.attr('href', url);
+        c.attr('title', title);
+    }
+    zss_editor.enabledEditingItems();
+    
+}//end
+
+zss_editor.updateImage = function(url, alt) {
+    
+    zss_editor.restorerange();
+    
+    if (zss_editor.currentEditingImage) {
+        var c = zss_editor.currentEditingImage;
+        c.attr('src', url);
+        c.attr('alt', alt);
+    }
+    zss_editor.enabledEditingItems();
+    
+}//end
+
+zss_editor.updateImageBase64String = function(imageBase64String, alt) {
+    
+    zss_editor.restorerange();
+    
+    if (zss_editor.currentEditingImage) {
+        var c = zss_editor.currentEditingImage;
+        var src = 'data:image/jpeg;base64,' + imageBase64String;
+        c.attr('src', src);
+        c.attr('alt', alt);
+    }
+    zss_editor.enabledEditingItems();
+    
+}//end
+
+
+zss_editor.unlink = function() {
+    
+    if (zss_editor.currentEditingLink) {
+        var c = zss_editor.currentEditingLink;
+        c.contents().unwrap();
+    }
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.quickLink = function() {
+    
+    var sel = document.getSelection();
+    var link_url = "";
+    var test = new String(sel);
+    var mailregexp = new RegExp("^(.+)(\@)(.+)$", "gi");
+    if (test.search(mailregexp) == -1) {
+        checkhttplink = new RegExp("^http\:\/\/", "gi");
+        if (test.search(checkhttplink) == -1) {
+            checkanchorlink = new RegExp("^\#", "gi");
+            if (test.search(checkanchorlink) == -1) {
+                link_url = "http://" + sel;
+            } else {
+                link_url = sel;
+            }
+        } else {
+            link_url = sel;
+        }
+    } else {
+        checkmaillink = new RegExp("^mailto\:", "gi");
+        if (test.search(checkmaillink) == -1) {
+            link_url = "mailto:" + sel;
+        } else {
+            link_url = sel;
+        }
+    }
+    
+    var html_code = '<a href="' + link_url + '">' + sel + '</a>';
+    zss_editor.insertHTML(html_code);
+    
+}
+
+zss_editor.prepareInsert = function() {
+    zss_editor.backuprange();
+}
+
+zss_editor.insertImage = function(url, alt) {
+    zss_editor.restorerange();
+    var html = '<img src="'+url+'" alt="'+alt+'" />';
+    zss_editor.insertHTML(html);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.insertImageBase64String = function(imageBase64String, alt) {
+    zss_editor.restorerange();
+    var html = '<img src="data:image/jpeg;base64,'+imageBase64String+'" alt="'+alt+'" />';
+    zss_editor.insertHTML(html);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.setHTML = function(html) {
+    var editor = $('#zss_editor_content');
+    editor.html(html);
+}
+
+zss_editor.insertHTML = function(html) {
+    document.execCommand('insertHTML', false, html);
+    zss_editor.enabledEditingItems();
+}
+
+zss_editor.getHTML = function() {
+    
+    // Images
+    var img = $('img');
+    if (img.length != 0) {
+        $('img').removeClass('zs_active');
+        $('img').each(function(index, e) {
+                      var image = $(this);
+                      var zs_class = image.attr('class');
+                      if (typeof(zs_class) != "undefined") {
+                      if (zs_class == '') {
+                      image.removeAttr('class');
+                      }
+                      }
+                      });
+    }
+    
+    // Blockquote
+    var bq = $('blockquote');
+    if (bq.length != 0) {
+        bq.each(function() {
+                var b = $(this);
+                if (b.css('border').indexOf('none') != -1) {
+                b.css({'border': ''});
+                }
+                if (b.css('padding').indexOf('0px') != -1) {
+                b.css({'padding': ''});
+                }
+                });
+    }
+    
+    // Get the contents
+    var h = document.getElementById("zss_editor_content").innerHTML;
+    
+    return h;
+}
+
+zss_editor.getText = function() {
+    return $('#zss_editor_content').text();
+}
+
+zss_editor.isCommandEnabled = function(commandName) {
+    return document.queryCommandState(commandName);
+}
+
+zss_editor.enabledEditingItems = function(e) {
+    
+    console.log('enabledEditingItems');
+    var items = [];
+    if (zss_editor.isCommandEnabled('bold')) {
+        items.push('bold');
+    }
+    if (zss_editor.isCommandEnabled('italic')) {
+        items.push('italic');
+    }
+    if (zss_editor.isCommandEnabled('subscript')) {
+        items.push('subscript');
+    }
+    if (zss_editor.isCommandEnabled('superscript')) {
+        items.push('superscript');
+    }
+    if (zss_editor.isCommandEnabled('strikeThrough')) {
+        items.push('strikeThrough');
+    }
+    if (zss_editor.isCommandEnabled('underline')) {
+        items.push('underline');
+    }
+    if (zss_editor.isCommandEnabled('insertOrderedList')) {
+        items.push('orderedList');
+    }
+    if (zss_editor.isCommandEnabled('insertUnorderedList')) {
+        items.push('unorderedList');
+    }
+    if (zss_editor.isCommandEnabled('insertCheckboxList')) {
+        items.push('checkboxList');
+    }
+    if (zss_editor.isCommandEnabled('justifyCenter')) {
+        items.push('justifyCenter');
+    }
+    if (zss_editor.isCommandEnabled('justifyFull')) {
+        items.push('justifyFull');
+    }
+    if (zss_editor.isCommandEnabled('justifyLeft')) {
+        items.push('justifyLeft');
+    }
+    if (zss_editor.isCommandEnabled('justifyRight')) {
+        items.push('justifyRight');
+    }
+    if (zss_editor.isCommandEnabled('insertHorizontalRule')) {
+        items.push('horizontalRule');
+    }
+    var formatBlock = document.queryCommandValue('formatBlock');
+    if (formatBlock.length > 0) {
+        items.push(formatBlock);
+    }
+    // Images
+    $('img').bind('touchstart', function(e) {
+                  $('img').removeClass('zs_active');
+                  $(this).addClass('zs_active');
+                  });
+    
+    // Use jQuery to figure out those that are not supported
+    if (typeof(e) != "undefined") {
+        
+        // The target element
+        var s = zss_editor.getSelectedNode();
+        var t = $(s);
+        var nodeName = e.target.nodeName.toLowerCase();
+        
+        // Background Color
+        var bgColor = t.css('backgroundColor');
+        if (bgColor.length != 0 && bgColor != 'rgba(0, 0, 0, 0)' && bgColor != 'rgb(0, 0, 0)' && bgColor != 'transparent') {
+            items.push('backgroundColor');
+        }
+        // Text Color
+        var textColor = t.css('color');
+        if (textColor.length != 0 && textColor != 'rgba(0, 0, 0, 0)' && textColor != 'rgb(0, 0, 0)' && textColor != 'transparent') {
+            items.push('textColor');
+        }
+		
+		//Fonts
+		var font = t.css('font-family');
+		if (font.length != 0 && font != 'Arial, Helvetica, sans-serif') {
+			items.push('fonts');	
+		}
+		
+        // Link
+        if (nodeName == 'a') {
+            zss_editor.currentEditingLink = t;
+            var title = t.attr('title');
+            items.push('link:'+t.attr('href'));
+            if (t.attr('title') !== undefined) {
+                items.push('link-title:'+t.attr('title'));
+            }
+            
+        } else {
+            zss_editor.currentEditingLink = null;
+        }
+        // Blockquote
+        if (nodeName == 'blockquote') {
+            items.push('indent');
+        }
+        // Image
+        if (nodeName == 'img') {
+            zss_editor.currentEditingImage = t;
+            items.push('image:'+t.attr('src'));
+            if (t.attr('alt') !== undefined) {
+                items.push('image-alt:'+t.attr('alt'));
+            }
+            
+        } else {
+            zss_editor.currentEditingImage = null;
+        }
+        
+    }
+    
+    if (items.length > 0) {
+        if (zss_editor.isUsingiOS) {
+            //window.location = "zss-callback/"+items.join(',');
+            window.location = "callback://0/"+items.join(',');
+        } else {
+            console.log("callback://"+items.join(','));
+        }
+    } else {
+        if (zss_editor.isUsingiOS) {
+            window.location = "zss-callback/";
+        } else {
+            console.log("callback://");
+        }
+    }
+    
+}
+
+zss_editor.focusEditor = function() {
+    
+    // the following was taken from http://stackoverflow.com/questions/1125292/how-to-move-cursor-to-end-of-contenteditable-entity/3866442#3866442
+    // and ensures we move the cursor to the end of the editor
+    var editor = $('#zss_editor_content');
+    var range = document.createRange();
+    range.selectNodeContents(editor.get(0));
+    range.collapse(false);
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    editor.focus();
+}
+
+zss_editor.blurEditor = function() {
+    $('#zss_editor_content').blur();
+}
+
+zss_editor.setCustomCSS = function(customCSS) {
+    
+    document.getElementsByTagName('style')[0].innerHTML=customCSS;
+    
+    //set focus
+    /*editor.focusout(function(){
+                    var element = $(this);
+                    if (!element.text().trim().length) {
+                    element.empty();
+                    }
+                    });*/
+    
+    
+    
+}
+
+//end
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- CSS Styles for ZSSRichTextEditor -->
+<style type="text/css">
+
+/* Default ZSSRichTextEditor Styling */
+* {
+    outline: 0px solid transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+ 
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
       
-      getDownloadUrl('Android', function (url) {
-        new QRCode(document.getElementById("androidQrcode"), {
-          text: url, 
-          width: 180,
-          height: 180
-        });
-        document.getElementById("androidQrcode").style.display = "block";
-      })
-   }
-  </script>
+body {
+    padding: 10px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+}
+
+img.zs_active {
+    border: 2px dashed #000;
+}
+      
+audio {
+    padding: 20px 0;
+}
+
+div.zs_editor_content {
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow:auto;
+}
+
+[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555;
+}
+
+[placeholder]:empty:focus:before {
+    content: "";
+}
+    
+</style>
+
+</head>
+
+<body onLoad="zss_editor.init();">
+
+    <!-- ZSSRichTextEditor Editable Content -->
+    <div id="zss_editor_content" class="zs_editor_content" contenteditable="true" placeholder=""></div>
+	  <div>dfasfsafsdaf</div>
+    <!-- Footer -->
+    <div id="zss_editor_footer"></div>
+
+</body>
 </html>

@@ -1,0 +1,19 @@
+syntax = "proto3";
+ 
+// 自定义IMSDK私信消息类型, 扩展协议，使用1000以上的值，具体值自行维护，IM云不关心，会在Message中透传
+enum KimMessageType {
+    // First enum value must be zero in proto3
+    UNKNOWN = 0;
+    ANNOUNCEMENT_PUBLISHED = 1002;
+}
+ 
+ 
+// 保存并通知群公告的时候发送
+message AnnouncementPublished {
+    // 是否有新人必读标签
+    bool send_to_new = 1;
+    // 群公告内容
+    string content = 2;
+    // 是否是新人进群的消息
+    bool send_to_new_only = 3;
+}
