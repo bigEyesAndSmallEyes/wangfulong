@@ -6,7 +6,7 @@
 - 工作中，主动推动各部门进度，协调各部门间项目同步。
 
 ## Education
-**首都师范大学**  &emsp;计算机科学与技术(学士学位) &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;2009 &ndash; 2013
+**首都师范大学**  &emsp;计算机科学与技术(学士学位) &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;2009 &ndash; 2013
   
 
 ## Skills
@@ -29,7 +29,7 @@
 
 > **一起写Office**  
 
-2016/10 &ndash; 2018/05
+2016/10 &ndash; 2018/05   
 **一起写、Meet、销售管理系统** 
 - 负责一起写Web端UI和功能，登录、搜索、导航、页面布局（React/Flux/Google Cloure/Java）
 - 适配一切写页面在钉钉，企业微信的UI展示（Mobile）
@@ -39,7 +39,7 @@
 
 > **北京点聚信息科技有限公司**   
 
-2014/9 &ndash; 2016/10 
+2014/9 &ndash; 2016/10   
 **中华保险、安邦保险、中石化、中国能源建设集团、利安人寿无纸化签章项目、工时系统**
 - 维护电签平台，参与定制化开发（**Java/Oracle**）
 - 优化WebService自动盖章接口，优化冗余代码与查询SQL
