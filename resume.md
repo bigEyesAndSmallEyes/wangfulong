@@ -26,7 +26,8 @@
 - 赶在企业微信全面切换Kim前，独自快速搭建Kim后台系统，满足HR日常人员/部门/权限管理的需求（**React/Redux**）
 - 开发轻量级任务管理系统Task（Meteor/Nodejs/Mongo)
 - 独立负责Okr/Review全栈工作，快速搭建完成满足紧急使用与试错（**Java/React**）  
-
+          
+          
 
 > **一起写Office**  
 
@@ -38,7 +39,8 @@
 - 开发销售管理系统（React/Redux）
 - 无任何前端经验情况下一周内完成一起写官网首页 （CSS/HTML/jQuery)   
 
-
+     
+     
 > **北京点聚信息科技有限公司**   
 
 2014/9 &ndash; 2016/10   
