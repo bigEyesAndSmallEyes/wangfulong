@@ -27,15 +27,14 @@
 - 独立负责Okr/Review全栈工作，快速搭建完成满足紧急使用与试错（**Java/React**）   
 
 **一起写Office**  
-
 *2016/10 &ndash; 2018/05*
-
 ***一起写、Meet、销售管理系统***  
 - 负责一起写Web端UI和功能，登录、搜索、导航、页面布局（React/Flux/Google Cloure/Java）
 - 适配一切写页面在钉钉，企业微信的UI展示（Mobile）
 - 独立负责Meet视频会议Web端开发（WebRTC/React/Material-UI)
 - 开发销售管理系统（React/Redux）
 - 无任何前端经验情况下一周内完成一起写官网首页 （CSS/HTML/jQuery)   
+
 **北京点聚信息科技有限公司**   
 *2014/9 &ndash; 2016/10*   
 ***中华保险、安邦保险、中石化、中国能源建设集团、利安人寿无纸化签章项目、工时系统*** 
