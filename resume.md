@@ -6,7 +6,7 @@
 - 工作中，主动推动各部门进度，协调各部门间项目同步。
 
 ## Education
-**首都师范大学** &emsp;*计算机科学与技术(学士学位）* &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *2009 &ndash; 2013* 
+**首都师范大学**  *计算机科学与技术(学士学位)*                                                               *2009 &ndash; 2013* 
   
 
 ## Skills
