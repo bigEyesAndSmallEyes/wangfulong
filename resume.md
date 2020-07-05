@@ -21,7 +21,7 @@
 
 2018/5 &ndash; 至今   
 **Kim、Kim后台、Task、OKR、Review**
-- 从零参与构建Kim团队技术栈，包括内部组件库，技术选型及内部框架, 参与PC端业务实现。（**Electron**/**React**/Redux/Redux-Saga/Graphql/Realm)
+- 从零参与构建Kim团队技术栈，包括内部组件库，技术选型及内部框架, 参与PC端业务实现（**Electron**/**React**/Redux/Redux-Saga/Graphql/Realm)
 - 设计实现登录模块，SMS登录限速，SSO接入，Kim内验证登录及第三方扫码登录（Node.js/Lua/Redis）
 - 赶在企业微信全面切换Kim前，独自快速搭建Kim后台系统，满足HR日常人员/部门/权限管理的需求（**React/Redux**）
 - 开发轻量级任务管理系统Task（**Meteor**/Node.js/Mongo)
