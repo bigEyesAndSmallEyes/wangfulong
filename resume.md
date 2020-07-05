@@ -33,7 +33,7 @@
 2016/10 &ndash; 2018/05   
 **一起写、Meet、销售管理系统** 
 - 负责一起写Web端UI和功能，登录、搜索、导航、页面布局（React/Flux/Google Cloure/Java/gRPC/Protocol Buffers）
-- 适配一切写页面在钉钉，企业微信的UI展示（Mobile）
+- 适配一起写页面在钉钉，企业微信的UI展示（Mobile）
 - 独立负责Meet视频会议Web端开发（WebRTC/React/Material-UI)
 - 开发销售管理系统（React/Redux）
 - 无任何前端经验情况下一周内完成一起写官网首页 （CSS/HTML/jQuery)   
